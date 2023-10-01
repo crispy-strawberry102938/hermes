@@ -1746,10 +1746,10 @@ class ScopedNativeCallFrame {
     // Poison the initial arguments to ensure the caller sets all of them before
     // a GC.
     assert(!overflowed_ && "Overflow should return early");
-    // overflowHasBeenChecked_ = true;
+    overflowHasBeenChecked_ = true;
     fillArguments(argCount, HermesValue::encodeInvalidValue());
     // We still want the user to check for overflow.
-    //overflowHasBeenChecked_ = false;
+    overflowHasBeenChecked_ = false;
 #endif
   }
 
