@@ -1,5 +1,8 @@
 name: C/C++ CI
 
+env:
+  ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
+
 on:
   push:
     branches: [ "main" ]
@@ -15,8 +18,8 @@ jobs:
     - name: Download zig
       run: |
         cd $GITHUB_WORKSPACE
-        curl -L -O https://ziglang.org/download/0.11.0/zig-linux-x86_64-0.11.0.tar.xz
-        tar -xf zig-linux-x86_64-0.11.0.tar.xz
+        curl -L -O https://ziglang.org/builds/$ZIG_VERSION.tar.xz
+        tar -xf $ZIG_VERSION.tar.xz
         
     - name: Build hermes
       run: |
@@ -24,8 +27,8 @@ jobs:
         sudo apt update
         sudo apt install cmake git ninja-build libicu-dev zip libreadline-dev
         git clone https://github.com/facebook/hermes.git
-        export PATH=$GITHUB_WORKSPACE/zig-linux-x86_64-0.11.0/:$PATH
-        export CC="zig cc -O3"
-        export CXX="zig c++ -O3"
+        export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
+        export CC="zig cc -O2 -fno-sanitize=undefined"
+        export CXX="zig c++ -O2 -fno-sanitize=undefined"
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
