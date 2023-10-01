@@ -17,9 +17,6 @@ jobs:
         cd $GITHUB_WORKSPACE
         curl -L -O https://ziglang.org/builds/zig-linux-x86_64-0.12.0-dev.696+9a001e1f7.tar.xz
         tar -xf zig-linux-x86_64-0.12.0-dev.696+9a001e1f7.tar.xz
-        export PATH=$GITHUB_WORKSPACE/zig-linux-x86_64-0.12.0-dev.696+9a001e1f7/:$PATH
-        export CC="zig cc"
-        export CXX="zig c++"
         
     - name: Build hermes
       run: |
@@ -27,5 +24,8 @@ jobs:
         sudo apt update
         sudo apt install cmake git ninja-build libicu-dev zip libreadline-dev
         git clone https://github.com/facebook/hermes.git
+        export PATH=$GITHUB_WORKSPACE/zig-linux-x86_64-0.12.0-dev.696+9a001e1f7/:$PATH
+        export CC="zig cc"
+        export CXX="zig c++"
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
