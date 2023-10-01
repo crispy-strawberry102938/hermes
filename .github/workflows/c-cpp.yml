@@ -28,7 +28,7 @@ jobs:
         sudo apt install cmake git ninja-build libicu-dev zip libreadline-dev
         git clone https://github.com/facebook/hermes.git
         export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
-        export CC="zig cc -O2 -fno-sanitize=undefined"
-        export CXX="zig c++ -O2 -fno-sanitize=undefined"
+        export CC="zig cc -O3 -fno-sanitize=undefined"
+        export CXX="zig c++ -O3 -fno-sanitize=undefined"
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
