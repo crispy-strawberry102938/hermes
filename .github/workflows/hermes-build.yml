@@ -2,8 +2,8 @@ name: Hermes Build
 
 env:
   ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
-  CC: zig cc -O2
-  CXX: zig c++ -O2
+  CC: zig cc -O2 -fno-sanitize=undefined
+  CXX: zig c++ -O2 -fno-sanitize=undefined
 
 on:
   push:
