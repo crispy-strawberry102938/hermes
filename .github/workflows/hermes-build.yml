@@ -2,8 +2,10 @@ name: Hermes Build
 
 env:
   ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
-  CC: zig cc
-  CXX: zig c++
+  CC: "zig cc"
+  CXX: "zig c++"
+  CFLAGS: "-O3 -fno-sanitize=undefined"
+  CXXFLAGS: "-O3 -fno-sanitize=undefined"
 
 on:
   push:
@@ -15,7 +17,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:    
     - name: Download zig
@@ -31,9 +33,8 @@ jobs:
         sudo apt install cmake git ninja-build libicu-dev zip libreadline-dev
         git clone https://github.com/facebook/hermes.git
         export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
-        cmake -S hermes -B build_release -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-O3 -fno-sanitize=undefined" -DCMAKE_CXX_FLAGS="-O3 -fno-sanitize=undefined"
+        cmake -S hermes -B build_release -G Ninja -DCMAKE_BUILD_TYPE=Release
         cmake --build ./build_release
-
 
 
     - name: Upload Hermes Build
@@ -42,4 +43,3 @@ jobs:
         path: |
           ${{ github.workspace }}/build_release
           !${{ github.workspace }}/build_release/unittests/**
-
