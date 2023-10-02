@@ -2,6 +2,8 @@ name: C/C++ CI
 
 env:
   ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
+  CC: zig cc -O2
+  CXX: zig c++ -O2
 
 on:
   push:
@@ -28,7 +30,13 @@ jobs:
         sudo apt install cmake git ninja-build libicu-dev zip libreadline-dev
         git clone https://github.com/facebook/hermes.git
         export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
-        export CC="zig cc -O2"
-        export CXX="zig c++ -O2"
         cmake -S hermes -B build_release -G Ninja -DCMAKE_BUILD_TYPE=Release
         cmake --build ./build_release
+
+    - name: Upload Hermes Build
+      uses: actions/upload-artifact@v3.1.3
+      with: 
+        path: |
+          $GITHUB_WORKSPACE/build_release
+          !$GITHUB_WORKSPACE/build_release/unittests
+
