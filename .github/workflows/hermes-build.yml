@@ -37,11 +37,10 @@ jobs:
         cd build_release
         ninja
         cd ${{ github.workspace }}
-        tar czf hermes_zig.tar.gz ${{ github.workspace }}/build_release/
+        tar czf hermes_zig.tar.gz ./build_release/
 
 
     - name: Upload Hermes Build
-      uses: actions/upload-artifact@v3.1.3
-      with: 
-        name: hermes_zig_build
-        path: ${{ github.workspace }}/hermes_zig.tar.gz
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "hermes_zig.tar.gz"
