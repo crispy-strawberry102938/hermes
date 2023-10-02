@@ -44,4 +44,5 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         name: ${{ github.run_id }}
+        commit: ${{ github.sha }}
         artifacts: "hermes_zig.tar.gz"
