@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Hermes Build
 
 env:
   ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
