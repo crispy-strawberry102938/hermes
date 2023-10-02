@@ -10,6 +10,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -31,10 +32,7 @@ jobs:
         git clone https://github.com/facebook/hermes.git
         export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
         cmake -S hermes -B build_release -G Ninja -DCMAKE_BUILD_TYPE=Release
-        cd build_release
-        echo "$PWD"
-        echo $GITHUB_WORKSPACE/build_release
-      # cmake --build ./build_release
+        cmake --build ./build_release
 
 
 
