@@ -43,4 +43,5 @@ jobs:
     - name: Upload Hermes Build
       uses: ncipollo/release-action@v1
       with:
+        name: ${{ github.run_id }}
         artifacts: "hermes_zig.tar.gz"
