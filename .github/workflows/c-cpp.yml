@@ -31,7 +31,12 @@ jobs:
         git clone https://github.com/facebook/hermes.git
         export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
         cmake -S hermes -B build_release -G Ninja -DCMAKE_BUILD_TYPE=Release
-        cmake --build ./build_release
+        cd build_release
+        echo "$PWD"
+        echo $GITHUB_WORKSPACE/build_release
+      # cmake --build ./build_release
+
+
 
     - name: Upload Hermes Build
       uses: actions/upload-artifact@v3.1.3
