@@ -21,3 +21,4 @@ jobs:
       with:
         name: ${{ github.run_id }}
         commit: ${{ github.sha }}
+        tag: main
