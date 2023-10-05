@@ -23,10 +23,16 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - name: Tag Repo
-      run: |
-        git tag ${{ inputs.version }}
-        git switch --detach ${{ inputs.version }}
+    - name: Create tag
+      uses: actions/github-script@v5
+      with:
+        script: |
+          github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ inputs.version }}',
+              sha: context.sha
+          })
     
     - name: Download zig
       run: |
