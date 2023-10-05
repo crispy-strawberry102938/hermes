@@ -4,8 +4,8 @@ env:
   ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
   CC: "zig cc"
   CXX: "zig c++"
-  CFLAGS: "-O3 -fno-sanitize=undefined"
-  CXXFLAGS: "-O3 -fno-sanitize=undefined"
+  #CFLAGS: "-O3 -fno-sanitize=undefined"
+  #CXXFLAGS: "-O3 -fno-sanitize=undefined"
 
 on:
   push:
