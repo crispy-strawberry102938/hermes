@@ -46,8 +46,7 @@ jobs:
         sudo apt install cmake git ninja-build libicu-dev zip libreadline-dev
         git clone https://github.com/facebook/hermes.git
 
-        export PATH = $GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
-
+        export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
 
         cmake -S hermes -B x86_64-linux-hermes_zig -G Ninja -DCMAKE_BUILD_TYPE=Release
         cd x86_64-linux-hermes_zig
