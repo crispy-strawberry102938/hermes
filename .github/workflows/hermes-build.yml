@@ -47,11 +47,11 @@ jobs:
         sudo apt install cmake git ninja-build libicu-dev zip libreadline-dev
         git clone https://github.com/facebook/hermes.git
 
-#        cmake -S hermes -B x86_64-linux-hermes_zig -G Ninja -DCMAKE_BUILD_TYPE=Release
-#        cd x86_64-linux-hermes_zig
-#        ninja
-#        cd ${{ github.workspace }}
-#        tar czf x86_64-linux-hermes_zig.tar.gz ./x86_64-linux-hermes_zig/
+        cmake -S hermes -B x86_64-linux-hermes_zig -G Ninja -DCMAKE_BUILD_TYPE=Release
+        cd x86_64-linux-hermes_zig
+        ninja
+        cd ${{ github.workspace }}
+        tar czf x86_64-linux-hermes_zig.tar.gz ./x86_64-linux-hermes_zig/
 
 
     - name: Upload Hermes Build
