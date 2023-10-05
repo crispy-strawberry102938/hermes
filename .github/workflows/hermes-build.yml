@@ -9,9 +9,8 @@ env:
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags: 
+      - '*'
   workflow_dispatch:
 
 jobs:
@@ -37,7 +36,7 @@ jobs:
         cd build_release
         ninja
         cd ${{ github.workspace }}
-        tar czf hermes_zig.tar.gz ./build_release/
+        tar czf x86_64-linux-hermes_zig.tar.gz ./build_release/
 
 
     - name: Upload Hermes Build
