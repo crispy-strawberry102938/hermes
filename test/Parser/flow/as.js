@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// RUN: %hermes -parse-ts -dump-ast -pretty-json %s | %FileCheck %s --match-full-lines
-// RUN: %hermes -parse-jsx -parse-ts -dump-ast -pretty-json %s | %FileCheck %s --match-full-lines
+// RUN: %hermes -parse-flow -dump-ast -pretty-json %s | %FileCheck %s --match-full-lines
 
 // CHECK-LABEL: {
 // CHECK-NEXT:   "type": "Program",
@@ -16,34 +15,13 @@ x as number;
 // CHECK-NEXT:     {
 // CHECK-NEXT:       "type": "ExpressionStatement",
 // CHECK-NEXT:       "expression": {
-// CHECK-NEXT:         "type": "TSAsExpression",
+// CHECK-NEXT:         "type": "AsExpression",
 // CHECK-NEXT:         "expression": {
 // CHECK-NEXT:           "type": "Identifier",
 // CHECK-NEXT:           "name": "x"
 // CHECK-NEXT:         },
 // CHECK-NEXT:         "typeAnnotation": {
-// CHECK-NEXT:           "type": "TSNumberKeyword"
-// CHECK-NEXT:         }
-// CHECK-NEXT:       },
-// CHECK-NEXT:       "directive": null
-// CHECK-NEXT:     },
-
-x as const;
-// CHECK-NEXT:     {
-// CHECK-NEXT:       "type": "ExpressionStatement",
-// CHECK-NEXT:       "expression": {
-// CHECK-NEXT:         "type": "TSAsExpression",
-// CHECK-NEXT:         "expression": {
-// CHECK-NEXT:           "type": "Identifier",
-// CHECK-NEXT:           "name": "x"
-// CHECK-NEXT:         },
-// CHECK-NEXT:         "typeAnnotation": {
-// CHECK-NEXT:           "type": "TSTypeReference",
-// CHECK-NEXT:           "typeName": {
-// CHECK-NEXT:             "type": "Identifier",
-// CHECK-NEXT:             "name": "const"
-// CHECK-NEXT:           },
-// CHECK-NEXT:           "typeParameters": null
+// CHECK-NEXT:           "type": "NumberTypeAnnotation"
 // CHECK-NEXT:         }
 // CHECK-NEXT:       },
 // CHECK-NEXT:       "directive": null
@@ -53,7 +31,7 @@ x + y as number;
 // CHECK-NEXT:     {
 // CHECK-NEXT:       "type": "ExpressionStatement",
 // CHECK-NEXT:       "expression": {
-// CHECK-NEXT:         "type": "TSAsExpression",
+// CHECK-NEXT:         "type": "AsExpression",
 // CHECK-NEXT:         "expression": {
 // CHECK-NEXT:           "type": "BinaryExpression",
 // CHECK-NEXT:           "left": {
@@ -67,7 +45,7 @@ x + y as number;
 // CHECK-NEXT:           "operator": "+"
 // CHECK-NEXT:         },
 // CHECK-NEXT:         "typeAnnotation": {
-// CHECK-NEXT:           "type": "TSNumberKeyword"
+// CHECK-NEXT:           "type": "NumberTypeAnnotation"
 // CHECK-NEXT:         }
 // CHECK-NEXT:       },
 // CHECK-NEXT:       "directive": null
@@ -77,23 +55,23 @@ x as any as number;
 // CHECK-NEXT:     {
 // CHECK-NEXT:       "type": "ExpressionStatement",
 // CHECK-NEXT:       "expression": {
-// CHECK-NEXT:         "type": "TSAsExpression",
+// CHECK-NEXT:         "type": "AsExpression",
 // CHECK-NEXT:         "expression": {
-// CHECK-NEXT:           "type": "TSAsExpression",
+// CHECK-NEXT:           "type": "AsExpression",
 // CHECK-NEXT:           "expression": {
 // CHECK-NEXT:             "type": "Identifier",
 // CHECK-NEXT:             "name": "x"
 // CHECK-NEXT:           },
 // CHECK-NEXT:           "typeAnnotation": {
-// CHECK-NEXT:             "type": "TSAnyKeyword"
+// CHECK-NEXT:             "type": "AnyTypeAnnotation"
 // CHECK-NEXT:           }
 // CHECK-NEXT:         },
 // CHECK-NEXT:         "typeAnnotation": {
-// CHECK-NEXT:           "type": "TSNumberKeyword"
+// CHECK-NEXT:           "type": "NumberTypeAnnotation"
 // CHECK-NEXT:         }
 // CHECK-NEXT:       },
 // CHECK-NEXT:       "directive": null
 // CHECK-NEXT:     }
-// CHECK-NEXT:   ]
 
+// CHECK-NEXT:   ]
 // CHECK-NEXT: }
