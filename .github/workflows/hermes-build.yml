@@ -4,8 +4,9 @@ env:
   ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
   CC: "zig cc"
   CXX: "zig c++"
-  CFLAGS: "-O3 -fno-sanitize=undefined"
-  CXXFLAGS: "-O3 -fno-sanitize=undefined"
+  CFLAGS: "-O2 -fno-sanitize=undefined"
+  CXXFLAGS: "-O2 -fno-sanitize=undefined"
+  PATH: $GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
 
 on:
   push:
@@ -31,18 +32,15 @@ jobs:
         sudo apt update
         sudo apt install cmake git ninja-build libicu-dev zip libreadline-dev
         git clone https://github.com/facebook/hermes.git
-        export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
-        cmake -S hermes -B build_release -G Ninja -DCMAKE_BUILD_TYPE=Release
-        cd build_release
+
+        cmake -S hermes -B x86_64-linux-hermes_zig -G Ninja -DCMAKE_BUILD_TYPE=Release
+        cd x86_64-linux-hermes_zig
         ninja
         cd ${{ github.workspace }}
-        tar czf x86_64-linux-hermes_zig.tar.gz ./build_release/
+        tar czf x86_64-linux-hermes_zig.tar.gz ./x86_64-linux-hermes_zig/
 
 
     - name: Upload Hermes Build
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ github.run_id }}
-        commit: ${{ github.sha }}
-        tag: main
-        artifacts: "hermes_zig.tar.gz"
+        artifacts: "x86_64-linux-hermes_zig.tar.gz"
