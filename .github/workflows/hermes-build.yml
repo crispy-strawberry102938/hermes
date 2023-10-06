@@ -2,8 +2,8 @@ name: Hermes Build
 
 env:
   ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
-  CC: "zig cc -fno-sanitize=undefined"
-  CXX: "zig c++ -fno-sanitize=undefined"
+  CC: "zig cc -fno-sanitize-trap"
+  CXX: "zig c++ -fno-sanitize-trap"
   #CFLAGS: "-O3 -fno-sanitize=undefined"
   #CXXFLAGS: "-O3 -fno-sanitize=undefined"
 
