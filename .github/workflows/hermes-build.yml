@@ -1,7 +1,7 @@
 name: Hermes Build
 
 env:
-  ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.696+9a001e1f7
+  ZIG_VERSION: zig-linux-x86_64-0.12.0-dev.789+e6590fea1
   CC: "zig cc"
   CXX: "zig c++"
   #CFLAGS: "-O3 -fno-sanitize=undefined"
@@ -48,12 +48,14 @@ jobs:
 
         export PATH=$GITHUB_WORKSPACE/$ZIG_VERSION/:$PATH
 
+        export CFLAGS=-fno-sanitize=undefined
+        export CXXFLAGS=-fno-sanitize=undefined
         cmake -S hermes -B x86_64-linux-hermes_zig -G Ninja -DCMAKE_BUILD_TYPE=Release
         cd x86_64-linux-hermes_zig
         cat build.ninja
-      #ninja
-      #cd ${{ github.workspace }}
-      #tar czf x86_64-linux-hermes_zig.tar.gz ./x86_64-linux-hermes_zig/
+        ninja
+        cd ${{ github.workspace }}
+        tar czf x86_64-linux-hermes_zig.tar.gz ./x86_64-linux-hermes_zig/
 
 
     - name: Upload Hermes Build
